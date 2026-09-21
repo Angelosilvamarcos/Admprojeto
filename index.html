@@ -126,8 +126,8 @@ footer{max-width:1200px;margin:auto;padding:10px 18px 40px;color:#667085;font-si
 <footer>Conecta Mais 4.0 · IA como apoio à decisão · dados de demonstração fictícios · decisões críticas permanecem sob validação humana.</footer>
 
 <script>
-const KEY='conectaMais4_v2';
-const GOOGLE_SHEETS_API='https://script.google.com/macros/s/AKfycbyDr5RRXOLJgSMke1oZczJLdEzHw5TXwqcz6bFDJKEIM1ktBrnsHUtZ0ccEA4z8P2s/exec';
+const KEY='conectaMais4_github_v1';
+const GOOGLE_SHEETS_API='https://script.google.com/macros/s/AKfycby0ySV3A0zMa1I45GpyDPaaV7P-Aey1lBH5-FR5uRjW9M_9SMLpiwhoaH7hI_bR47Ju/exec';
 let dados=JSON.parse(localStorage.getItem(KEY)||'[]');
 const demo=[
  {produto:'Notebook Conecta Pro',problema:'Defeito',tipo:'Reclamação',mensagem:'O notebook chegou com defeito e preciso de troca.',canal:'Web',nome:'Cliente 01',prazo:8},
@@ -159,10 +159,19 @@ function login(){if(document.getElementById('senha').value==='conecta4'){documen
 function sair(){document.getElementById('gestao').classList.add('hidden');document.getElementById('cliente').classList.remove('hidden');document.querySelector('.hero').classList.remove('hidden');window.scrollTo(0,0)}
 document.getElementById('form').addEventListener('submit',e=>{
  e.preventDefault();
- const item={id:'CM-'+String(Date.now()).slice(-6),canal:canal.value,nome:nome.value,produto:produto.value,tipo:tipo.value,problema:problema.value,mensagem:mensagem.value,prazo:prazo.value};
+ const item={
+   id:'CM-'+String(Date.now()).slice(-6),
+   canal:document.getElementById('canal').value,
+   nome:document.getElementById('nome').value.trim(),
+   produto:document.getElementById('produto').value,
+   tipo:document.getElementById('tipo').value,
+   problema:document.getElementById('problema').value,
+   mensagem:document.getElementById('mensagem').value.trim(),
+   prazo:document.getElementById('prazo').value
+ };
  classificar(item);dados.push(item);localStorage.setItem(KEY,JSON.stringify(dados));
  enviarParaPlanilha(item, 'insert');
- resultado.classList.remove('hidden');resultado.innerHTML=`<b>✅ Pedido registrado.</b><br>Protocolo: <b>${item.id}</b><br>Produto: ${item.produto}<br>Problema: ${item.problema}<br>Setor: ${item.setor}<br>Prioridade: <b>${item.prioridade}</b><br>Status: ${item.status}${item.duplicidade?'<br><br>⚠️ Possível duplicidade — encaminhar para validação humana.':''}`;
+ resultado.classList.remove('hidden');resultado.innerHTML=`<b>✅ Pedido registrado.</b><br><span class="small">↗ Envio para a base Google Sheets disparado.</span><br>Protocolo: <b>${item.id}</b><br>Produto: ${item.produto}<br>Problema: ${item.problema}<br>Setor: ${item.setor}<br>Prioridade: <b>${item.prioridade}</b><br>Status: ${item.status}${item.duplicidade?'<br><br>⚠️ Possível duplicidade — encaminhar para validação humana.':''}`;
  e.target.reset();
 });
 function renderAdmin(){
@@ -190,9 +199,11 @@ async function enviarParaPlanilha(item, action){
      headers:{'Content-Type':'text/plain;charset=utf-8'},
      body:JSON.stringify(payload)
    });
-   console.log('Dados enviados ao Google Sheets:', item.id, action);
+   console.log('Sincronização enviada:', item.id, action);
+   return {ok:true};
  }catch(err){
-   console.error('Falha ao enviar para o Google Sheets:',err);
+   console.error('Falha na sincronização:', err);
+   return {ok:false, error:err};
  }
 }
 

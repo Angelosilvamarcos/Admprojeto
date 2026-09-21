@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conecta Mais 4.0 — Central inteligente de atendimento</title>
+<style>
+:root{--blue:#0b4f8a;--cyan:#19a8c7;--ink:#172033;--muted:#667085;--bg:#f3f7fb;--card:#fff;--line:#dbe4ee;--green:#138a5b;--red:#c62828;--orange:#c77700}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#073b78,#11a8c6);color:#fff;padding:22px 5vw}
+.top{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:50%;background:#fff2;color:white;border:1px solid #ffffff66;display:grid;place-items:center;font-weight:800;font-size:20px}
+.brand h1{font-size:20px;margin:0}.brand small{opacity:.85}
+.nav button{background:#fff;color:#0b4f8a;border:0;border-radius:24px;padding:11px 18px;font-weight:700;cursor:pointer}
+.hero{background:linear-gradient(135deg,#0b4f8a,#12a9c7);color:white;padding:46px 5vw 70px}.hero-inner{max-width:1200px;margin:auto}
+.hero h2{font-size:clamp(36px,5vw,66px);line-height:1.03;max-width:850px;margin:0 0 18px}.hero p{font-size:18px;max-width:750px;line-height:1.5}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1000px;margin-top:32px}.feature{background:#ffffff16;border:1px solid #ffffff22;border-radius:16px;padding:20px}.feature b{display:block;font-size:16px;margin-bottom:8px}.feature span{font-size:13px;opacity:.9}
+main{max-width:1200px;margin:-28px auto 50px;padding:0 18px}.card{background:var(--card);border-radius:18px;box-shadow:0 8px 28px #102a5612;border:1px solid #e6edf5;padding:24px;margin-bottom:20px}
+h3{margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700;display:block;margin-bottom:6px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;background:#fff}textarea{min-height:120px;resize:vertical}
+.btn{border:0;border-radius:10px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:var(--green);color:#fff;width:100%;font-size:16px}.secondary{background:#edf3f8;color:#16304d}.hidden{display:none!important}
+.notice{background:#edf8ff;border:1px solid #ccebf5;border-radius:12px;padding:12px;font-size:13px;margin-top:12px}.result{margin-top:15px;padding:15px;border-radius:12px;background:#eefaf5;border:1px solid #cbeadb}.error{background:#fff1f1;border-color:#ffd0d0}
+.adminbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.kpi{padding:15px;border-radius:13px;background:#f2f6fa}.kpi span{font-size:12px;color:var(--muted)}.kpi strong{display:block;font-size:25px;margin-top:4px}
+.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{padding:10px;border-bottom:1px solid #e7edf3;text-align:left;vertical-align:top}th{background:#f5f8fb;position:sticky;top:0}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-weight:700;background:#edf2f7}.urgent{background:#ffe1e1;color:#a31d1d}.alta{background:#fff0d5;color:#9a5b00}.resolved{background:#e3f7ed;color:#0c6b46}.dup{background:#fff0d5;color:#9a5b00}
+.small{font-size:12px;color:var(--muted)}.login{max-width:420px;margin:30px auto}.privacy{font-size:11px;color:#667085;line-height:1.5}
+footer{max-width:1200px;margin:auto;padding:10px 18px 40px;color:#667085;font-size:12px}
+@media(max-width:900px){.features,.kpis{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+@media(max-width:560px){.features,.kpis,.filters{grid-template-columns:1fr}.top{align-items:flex-start}.hero{padding-bottom:55px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top">
+  <div class="brand"><div class="logo">C+</div><div><h1>Conecta Mais 4.0</h1><small>Central inteligente de atendimento</small></div></div>
+  <div class="nav"><button onclick="abrirGestao()">Área da equipe</button></div>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="hero-inner">
+  <h2>Seu pedido registrado, classificado e com prazo — na hora.</h2>
+  <p>Conte o que você precisa. A central identifica a categoria, define a prioridade, verifica repetições e devolve um protocolo para acompanhamento.</p>
+  <div class="features">
+   <div class="feature"><b>✦ Classificação automática</b><span>Categoria, produto, problema, setor e prioridade definidos na entrada.</span></div>
+   <div class="feature"><b>◷ Prazo definido</b><span>Cada solicitação recebe data de vencimento e acompanhamento.</span></div>
+   <div class="feature"><b>♢ Sem duplicidade</b><span>Mensagens repetidas são sinalizadas para validação humana.</span></div>
+  </div>
+ </div>
+</section>
+
+<main id="cliente">
+ <section class="card">
+  <h3>Novo pedido ou reclamação</h3>
+  <p class="small">Nome e contato são opcionais. Para a apresentação, use somente dados fictícios.</p>
+  <form id="form">
+   <div class="grid">
+    <div><label>Canal de origem</label><select id="canal"><option>Web</option><option>WhatsApp</option><option>E-mail</option><option>Telefone</option></select></div>
+    <div><label>Nome (opcional)</label><input id="nome" placeholder="Cliente fictício"></div>
+    <div><label>Produto</label><select id="produto">
+      <option>Smartphone Conecta X1</option><option>Notebook Conecta Pro</option><option>Fone Bluetooth Conecta Air</option>
+      <option>Mochila Executiva Conecta</option><option>Camiseta Conecta Premium</option><option>Tênis Conecta Sport</option>
+      <option>Outro produto</option><option>Não sei / não identificado</option>
+    </select></div>
+    <div><label>Tipo</label><select id="tipo"><option>Reclamação</option><option>Pedido / solicitação</option><option>Dúvida</option><option>Elogio</option></select></div>
+    <div><label>Problema apresentado</label><select id="problema">
+      <option>Defeito</option><option>Troca</option><option>Garantia</option><option>Pagamento / cobrança</option>
+      <option>Entrega atrasada</option><option>Produto incompleto</option><option>Avaria</option><option>Tamanho</option>
+      <option>Senha / acesso</option><option>Demora no atendimento</option><option>Não atendimento</option>
+      <option>Decorrência do pedido</option><option>Outro</option>
+    </select></div>
+    <div><label>Prazo de referência</label><select id="prazo"><option value="4">4 horas</option><option value="8">8 horas</option><option value="24" selected>24 horas</option><option value="48">48 horas</option></select></div>
+    <div class="full"><label>Descreva o pedido ou reclamação</label><textarea id="mensagem" required placeholder="Ex.: Meu Notebook Conecta Pro chegou com defeito e preciso de orientação para troca."></textarea></div>
+   </div>
+   <br><button class="btn primary">Enviar pedido</button>
+   <div id="resultado" class="result hidden"></div>
+  </form>
+ </section>
+</main>
+
+<section id="loginArea" class="hidden">
+ <div class="login card">
+  <h3>🔐 Acesso restrito — Área da equipe</h3>
+  <p class="small">Somente pessoas autorizadas devem acessar dados de atendimento.</p>
+  <input id="senha" type="password" placeholder="Senha de demonstração">
+  <br><br><button class="btn primary" onclick="login()">Entrar</button>
+  <p class="privacy">Protótipo acadêmico: a senha demonstrativa não substitui autenticação segura em produção.</p>
+ </div>
+</section>
+
+<section id="gestao" class="hidden">
+ <main>
+  <section class="card">
+   <div class="adminbar"><div><h3>Área da equipe — Gestão</h3><span class="small">Visão interna dos pedidos, prazos, problemas e resoluções.</span></div><button class="btn secondary" onclick="sair()">Voltar para área do cliente</button></div>
+   <div class="kpis">
+    <div class="kpi"><span>Total</span><strong id="kTotal">0</strong></div>
+    <div class="kpi"><span>Não atendidos</span><strong id="kNao">0</strong></div>
+    <div class="kpi"><span>Em atendimento</span><strong id="kAnd">0</strong></div>
+    <div class="kpi"><span>Resolvidos</span><strong id="kRes">0</strong></div>
+    <div class="kpi"><span>Duplicados</span><strong id="kDup">0</strong></div>
+   </div>
+  </section>
+
+  <section class="card">
+   <h3>Filtros de gestão</h3>
+   <div class="filters">
+    <select id="fStatus" onchange="renderAdmin()"><option value="">Todos os status</option><option>Não atendido</option><option>Em atendimento</option><option>Resolvido</option><option>Aguardando cliente</option></select>
+    <select id="fProblema" onchange="renderAdmin()"><option value="">Todos os problemas</option><option>Duplicados</option><option>Resolvidos</option><option>Não atendimento</option><option>Demora no atendimento</option><option>Senha / acesso</option><option>Decorrência do pedido</option><option>Defeito</option><option>Troca</option><option>Entrega atrasada</option></select>
+    <select id="fPrioridade" onchange="renderAdmin()"><option value="">Todas as prioridades</option><option>Urgente</option><option>Alta</option><option>Normal</option></select>
+    <input id="fBusca" oninput="renderAdmin()" placeholder="Buscar por produto, problema ou texto">
+   </div>
+   <div class="tablewrap">
+   <table><thead><tr><th>Protocolo</th><th>Produto</th><th>Problema</th><th>Classificação</th><th>Prioridade</th><th>Status</th><th>Resolução</th><th>Prazo</th><th>Ação</th></tr></thead>
+   <tbody id="tabela"></tbody></table>
+   </div>
+  </section>
+
+  <section class="card">
+   <h3>Exportação</h3>
+   <p class="small">Baixe os dados em CSV para importar em planilha e conectar ao Power BI. Em uma implantação real, a fonte pode ser Google Sheets/SQL/CRM.</p>
+   <button class="btn secondary" onclick="baixarCSV()">Baixar CSV para Power BI</button>
+   <button class="btn secondary" onclick="limparDemo()">Limpar dados da demonstração</button>
+  </section>
+ </main>
+</section>
+
+<footer>Conecta Mais 4.0 · IA como apoio à decisão · dados de demonstração fictícios · decisões críticas permanecem sob validação humana.</footer>
+
+<script>
+const KEY='conectaMais4_v2';
+const GOOGLE_SHEETS_API='https://script.google.com/macros/s/AKfycbyDr5RRXOLJgSMke1oZczJLdEzHw5TXwqcz6bFDJKEIM1ktBrnsHUtZ0ccEA4z8P2s/exec';
+let dados=JSON.parse(localStorage.getItem(KEY)||'[]');
+const demo=[
+ {produto:'Notebook Conecta Pro',problema:'Defeito',tipo:'Reclamação',mensagem:'O notebook chegou com defeito e preciso de troca.',canal:'Web',nome:'Cliente 01',prazo:8},
+ {produto:'Smartphone Conecta X1',problema:'Senha / acesso',tipo:'Dúvida',mensagem:'Não consigo acessar minha conta.',canal:'WhatsApp',nome:'Cliente 02',prazo:4},
+ {produto:'Camiseta Conecta Premium',problema:'Tamanho',tipo:'Pedido / solicitação',mensagem:'Preciso trocar por outro tamanho.',canal:'E-mail',nome:'Cliente 03',prazo:24},
+ {produto:'Mochila Executiva Conecta',problema:'Entrega atrasada',tipo:'Reclamação',mensagem:'Meu pedido está atrasado.',canal:'Telefone',nome:'Cliente 04',prazo:4},
+ {produto:'Notebook Conecta Pro',problema:'Defeito',tipo:'Reclamação',mensagem:'O notebook chegou com defeito e preciso de troca.',canal:'Web',nome:'Cliente 05',prazo:8}
+];
+function classificar(item){
+ let urgente=['Entrega atrasada','Não atendimento','Demora no atendimento','Senha / acesso'].includes(item.problema);
+ let alta=['Defeito','Pagamento / cobrança','Troca','Garantia','Produto incompleto','Avaria'].includes(item.problema);
+ item.prioridade=urgente?'Urgente':alta?'Alta':'Normal';
+ item.setor=['Defeito','Troca','Garantia','Tamanho','Produto incompleto','Avaria'].includes(item.problema)?'Suporte/Pós-venda':
+ item.problema==='Pagamento / cobrança'?'Financeiro':
+ item.problema==='Entrega atrasada'?'Logística':'Atendimento';
+ item.status='Não atendido';
+ item.resolucao='—';
+ item.dataHora=new Date().toISOString();
+ item.vencimento=new Date(Date.now()+Number(item.prazo)*3600000).toISOString();
+ item.duplicidade=dados.some(x=>x.mensagem.toLowerCase()===item.mensagem.toLowerCase());
+ item.dataResolucao=item.dataResolucao||'';
+ item.tempoAtendimento=item.tempoAtendimento||'';
+ item.observacao=item.observacao||'';
+ return item;
+}
+function seed(){if(!dados.length){demo.forEach((x,i)=>{x.id='CM-'+String(i+1).padStart(4,'0');dados.push(classificar(x))});localStorage.setItem(KEY,JSON.stringify(dados));}}
+function abrirGestao(){document.getElementById('cliente').classList.add('hidden');document.querySelector('.hero').classList.add('hidden');document.getElementById('loginArea').classList.remove('hidden');window.scrollTo(0,0)}
+function login(){if(document.getElementById('senha').value==='conecta4'){document.getElementById('loginArea').classList.add('hidden');document.getElementById('gestao').classList.remove('hidden');renderAdmin();}else alert('Senha incorreta. Para demonstração, use: conecta4');}
+function sair(){document.getElementById('gestao').classList.add('hidden');document.getElementById('cliente').classList.remove('hidden');document.querySelector('.hero').classList.remove('hidden');window.scrollTo(0,0)}
+document.getElementById('form').addEventListener('submit',e=>{
+ e.preventDefault();
+ const item={id:'CM-'+String(Date.now()).slice(-6),canal:canal.value,nome:nome.value,produto:produto.value,tipo:tipo.value,problema:problema.value,mensagem:mensagem.value,prazo:prazo.value};
+ classificar(item);dados.push(item);localStorage.setItem(KEY,JSON.stringify(dados));
+ enviarParaPlanilha(item, 'insert');
+ resultado.classList.remove('hidden');resultado.innerHTML=`<b>✅ Pedido registrado.</b><br>Protocolo: <b>${item.id}</b><br>Produto: ${item.produto}<br>Problema: ${item.problema}<br>Setor: ${item.setor}<br>Prioridade: <b>${item.prioridade}</b><br>Status: ${item.status}${item.duplicidade?'<br><br>⚠️ Possível duplicidade — encaminhar para validação humana.':''}`;
+ e.target.reset();
+});
+function renderAdmin(){
+ let fs=fStatus.value, fp=fProblema.value, fpr=fPrioridade.value, q=fBusca.value.toLowerCase();
+ let filtered=dados.filter(x=>(!fs||x.status===fs)&&(!fpr||x.prioridade===fpr)&&(!q||`${x.produto} ${x.problema} ${x.mensagem}`.toLowerCase().includes(q)) &&
+   (!fp || (fp==='Duplicados'?x.duplicidade:fp==='Resolvidos'?x.status==='Resolvido':x.problema===fp)));
+ kTotal.textContent=dados.length;kNao.textContent=dados.filter(x=>x.status==='Não atendido').length;kAnd.textContent=dados.filter(x=>x.status==='Em atendimento').length;kRes.textContent=dados.filter(x=>x.status==='Resolvido').length;kDup.textContent=dados.filter(x=>x.duplicidade).length;
+ tabela.innerHTML=filtered.map((x,i)=>`<tr>
+ <td><b>${x.id}</b><br><span class="small">${new Date(x.dataHora).toLocaleString('pt-BR')}</span></td>
+ <td>${x.produto}</td><td>${x.problema}</td><td>${x.tipo}<br>${x.setor}</td>
+ <td><span class="badge ${x.prioridade==='Urgente'?'urgent':x.prioridade==='Alta'?'alta':''}">${x.prioridade}</span></td>
+ <td><select onchange="alterarStatus('${x.id}',this.value)"><option ${x.status==='Não atendido'?'selected':''}>Não atendido</option><option ${x.status==='Em atendimento'?'selected':''}>Em atendimento</option><option ${x.status==='Aguardando cliente'?'selected':''}>Aguardando cliente</option><option ${x.status==='Resolvido'?'selected':''}>Resolvido</option></select></td>
+ <td>${x.resolucao||'—'}<br><button class="btn secondary" style="padding:6px;margin-top:5px" onclick="resolver('${x.id}')">Registrar resolução</button></td>
+ <td>${new Date(x.vencimento).toLocaleString('pt-BR')}</td>
+ <td>${x.duplicidade?'<span class="badge dup">⚠ Duplicidade</span>':'—'}</td></tr>`).join('');
+}
+function alterarStatus(id,status){let x=dados.find(a=>a.id===id);if(x){x.status=status;if(status==='Resolvido'&&!x.dataResolucao)x.dataResolucao=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(dados));enviarParaPlanilha(x,'update');renderAdmin()}}
+function resolver(id){let r=prompt('Digite a resolução apresentada (ex.: troca autorizada, senha redefinida, orientação enviada):');if(r){let x=dados.find(a=>a.id===id);x.resolucao=r;x.status='Resolvido';x.dataResolucao=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(dados));enviarParaPlanilha(x,'update');renderAdmin()}}
+async function enviarParaPlanilha(item, action){
+ const payload={...item, action};
+ try{
+   await fetch(GOOGLE_SHEETS_API,{
+     method:'POST',
+     mode:'no-cors',
+     headers:{'Content-Type':'text/plain;charset=utf-8'},
+     body:JSON.stringify(payload)
+   });
+   console.log('Dados enviados ao Google Sheets:', item.id, action);
+ }catch(err){
+   console.error('Falha ao enviar para o Google Sheets:',err);
+ }
+}
+
+function baixarCSV(){
+ const cols=['id','dataHora','canal','nome','produto','tipo','problema','setor','prioridade','status','resolucao','prazo','vencimento','duplicidade','mensagem'];
+ const esc=v=>`"${String(v??'').replaceAll('"','""')}"`;const csv=[cols.join(';'),...dados.map(x=>cols.map(c=>esc(x[c])).join(';'))].join('\\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='conecta_mais_4_0_dados.csv';a.click();
+}
+function limparDemo(){if(confirm('Apagar os dados da demonstração?')){dados=[];localStorage.removeItem(KEY);renderAdmin()}}
+seed();
+</script>
+</body>
+</html>
